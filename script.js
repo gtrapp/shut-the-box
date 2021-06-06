@@ -26,8 +26,14 @@ diceSum = dice1 + dice2;
 
 console.log(diceSum);
 
-});
+for (let i=0; i<tileEl.length; i++) {
+   //tileEl[i].('tile--active');
+    // if (tileEl[i].classList.('tile--active')) {
+    //     tileEl[i].textContent = "";
+    // }
+}
 
+});
 
 
 tileEl.forEach(function(btn) {
@@ -37,19 +43,24 @@ tileEl.forEach(function(btn) {
     let tileNumber = this.textContent;
     tileInt = parseInt(tileNumber);
     tileSum += tileInt;
-    console.log("Tile Sum = " + tileSum);
-  
+    
     tileCheck(tileSum);
 
   });
 });
 
 const tileCheck = function(tilesum) {
-  if (tilesum == diceSum) {
-    console.log("It's a match!");
-  }else {
-    console.log("it's not a match");
-  }
+    console.log("Tile Sum = " + tileSum);
+
+    if (tilesum <= diceSum) {
+        console.log("It's a match!");
+    } else {
+        console.log("it's not a match");
+        for (let i=0; i<tileEl.length; i++) {
+            tileEl[i].classList.remove('tile--active');
+        }
+        
+    }
 }
 
 
