@@ -24,20 +24,24 @@ console.log(diceTotal);
 
 });
 
-let tileNumber;
-let tileSum;
+let tileInt = 0;
+let tileSum = 0;
 
 tileEl.forEach(function(btn) {
   btn.addEventListener('click', function() {
     this.classList.add('tile--active');
     
-    tileNumber = this.textContent;
-    let tileInt = parseInt(tileNumber);
-    console.log(tileInt);
-    console.log(typeof tileInt);
- 
+    let tileNumber = this.textContent;
+    tileInt = parseInt(tileNumber);
+    tileSum += tileInt;
+    console.log("Tile Sum = " + tileSum);
+
+    
   });
 });
+
+// tileSum += tileInt;
+console.log(tileInt + "returned outside");
 
 
 // Starting conditions
