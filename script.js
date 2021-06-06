@@ -49,13 +49,14 @@ tileEl.forEach(function(btn) {
   });
 });
 
+
 const tileCheck = function(tilesum) {
     console.log("Tile Sum = " + tileSum);
 
     if (tilesum <= diceSum) {
         console.log("It's a match!");
     } else {
-        console.log("it's not a match");
+        console.log("It's not a match");
         for (let i=0; i<tileEl.length; i++) {
             tileEl[i].classList.remove('tile--active');
         }
