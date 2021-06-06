@@ -6,9 +6,22 @@ const diceEl2 = document.getElementById("dice--2");
 const btnRoll = document.querySelector(".btn--roll");
 const btnNew = document.querySelector('.btn--new');
 
-let diceSum = 0;
-let tileInt = 0;
-let tileSum = 0;
+let diceSum, tileInt, tileSum;
+
+// Starting conditions
+const init = function () {
+    diceSum = 0;
+    tileInt = 0;
+    tileSum = 0;
+    diceEl1.classList.add('hidden');
+    diceEl2.classList.add('hidden');
+    for (let i=0; i<tileEl.length; i++) {
+        tileEl[i].classList.remove('tile--active');
+    }
+  };
+  init();
+
+
 
 //Rolling dice functionality
 btnRoll.addEventListener('click', function () {
@@ -34,7 +47,6 @@ for (let i=0; i<tileEl.length; i++) {
 }
 
 });
-
 
 tileEl.forEach(function(btn) {
   btn.addEventListener('click', function() {
@@ -67,12 +79,7 @@ const tileCheck = function(tilesum) {
 
 
 
-// Starting conditions
-const init = function () {
-    diceEl1.classList.add('hidden');
-    diceEl2.classList.add('hidden');
-  };
-  init();
+
 
 btnNew.addEventListener('click', init);
 
