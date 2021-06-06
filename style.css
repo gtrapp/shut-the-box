@@ -92,15 +92,9 @@ main {
   cursor: pointer;
 }
 
-.tile.a {
-    background-color: #c7365f;
-    opacity: 0.8;
-    border-radius: 9px;
-    color: #fff;
-    width: 65%;
-    padding: 2rem;
-    text-align: center;
-    transition: all 0.75s;
+.tile--active {
+    background-color: #365dc7;
+  
 }
 
 .tile-label {
@@ -115,6 +109,7 @@ main {
 }
 
 /* ABSOLUTE POSITIONED ELEMENTS */
+
 
 .btn {
   position: absolute;

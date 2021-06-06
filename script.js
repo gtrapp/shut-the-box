@@ -1,9 +1,10 @@
 "use strict";
 
-const tileEl = document.querySelector(".tile");
+const tileEl = document.querySelectorAll(".tile");
 const diceEl1 = document.getElementById("dice--1");
 const diceEl2 = document.getElementById("dice--2");
 const btnRoll = document.querySelector(".btn--roll");
+const btnNew = document.querySelector('.btn--new');
 
 //Rolling dice functionality
 btnRoll.addEventListener('click', function () {
@@ -23,12 +24,20 @@ console.log(diceTotal);
 
 });
 
-
-tileEl.addEventListener('click', function () {
-    console.log("tile clicked");
-    console.log(this); 
-    //player0El.classList.add('player--active');
+tileEl.forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    console.log(this);
+    this.classList.add('tile--active');
+  });
 });
 
 
 
+// Starting conditions
+const init = function () {
+    diceEl1.classList.add('hidden');
+    diceEl2.classList.add('hidden');
+  };
+  init();
+
+btnNew.addEventListener('click', init);
