@@ -24,13 +24,20 @@ console.log(diceTotal);
 
 });
 
+let tileNumber;
+let tileSum;
+
 tileEl.forEach(function(btn) {
   btn.addEventListener('click', function() {
-    console.log(this);
     this.classList.add('tile--active');
+    
+    tileNumber = this.textContent;
+    let tileInt = parseInt(tileNumber);
+    console.log(tileInt);
+    console.log(typeof tileInt);
+ 
   });
 });
-
 
 
 // Starting conditions
@@ -41,3 +48,4 @@ const init = function () {
   init();
 
 btnNew.addEventListener('click', init);
+
