@@ -6,6 +6,10 @@ const diceEl2 = document.getElementById("dice--2");
 const btnRoll = document.querySelector(".btn--roll");
 const btnNew = document.querySelector('.btn--new');
 
+let diceSum = 0;
+let tileInt = 0;
+let tileSum = 0;
+
 //Rolling dice functionality
 btnRoll.addEventListener('click', function () {
   //1. Generating a random dice roll
@@ -18,14 +22,13 @@ btnRoll.addEventListener('click', function () {
   diceEl1.src = `dice-${dice1}.png`;
   diceEl2.src = `dice-${dice2}.png`;
 
-let diceTotal = dice1 + dice2;
+diceSum = dice1 + dice2;
 
-console.log(diceTotal);
+console.log(diceSum);
 
 });
 
-let tileInt = 0;
-let tileSum = 0;
+
 
 tileEl.forEach(function(btn) {
   btn.addEventListener('click', function() {
@@ -35,13 +38,21 @@ tileEl.forEach(function(btn) {
     tileInt = parseInt(tileNumber);
     tileSum += tileInt;
     console.log("Tile Sum = " + tileSum);
+  
+    tileCheck(tileSum);
 
-    
   });
 });
 
-// tileSum += tileInt;
-console.log(tileInt + "returned outside");
+const tileCheck = function(tilesum) {
+  if (tilesum == diceSum) {
+    console.log("It's a match!");
+  }else {
+    console.log("it's not a match");
+  }
+}
+
+
 
 
 // Starting conditions
