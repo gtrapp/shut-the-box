@@ -119,6 +119,7 @@ const init = function () {
   resetTiles();
   disableTileSelect();
   tilesActive = true;
+  hints.innerHTML = "Roll the dice!";
 };
 init();
 
