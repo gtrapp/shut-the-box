@@ -5,84 +5,101 @@ const diceEl1 = document.getElementById("dice--1");
 const diceEl2 = document.getElementById("dice--2");
 const btnRoll = document.querySelector(".btn--roll");
 const btnNew = document.querySelector(".btn--new");
+const hints = document.getElementById("message");
 
-let diceSum, tileInt, tileSum, diceState, tileState;
+let diceSum = 0;
+let tileInt = 0;
+let tileSum = 0;
 
-// Starting conditions
-const init = function () {
-  diceSum = 0;
-  tileInt = 0;
+btnRoll.addEventListener("click", function () {
+  if (btnRoll.classList.contains("disable")) return;
+  //1. Generating a random dice roll
+  const dice1 = Math.trunc(Math.random() * 6) + 1;
+  const dice2 = Math.trunc(Math.random() * 6) + 1;
+
+  //2. Display dice
+  diceEl1.classList.remove("hidden");
+  diceEl2.classList.remove("hidden");
+  diceEl1.src = `dice-${dice1}.png`;
+  diceEl2.src = `dice-${dice2}.png`;
+
+  diceSum = dice1 + dice2;
+
+  console.log(diceSum);
+  // disable roll dice reset tile sum
   tileSum = 0;
-  diceState = true;
-  tileState = false;
+
+  // for (let i = 0; i < tileEl.length; i++) {
+  //   //tileEl[i].('tile--active');
+  //   // if (tileEl[i].classList.('tile--active')) {
+  //   //     tileEl[i].textContent = "";
+  //   // }
+  // }
+  disableDiceRoll();
+});
+const enableDiceRoll = function () {
   diceEl1.classList.add("hidden");
   diceEl2.classList.add("hidden");
-  for (let i = 0; i < tileEl.length; i++) {
-    tileEl[i].classList.remove("tile--active");
-  }
+
+  btnRoll.classList.remove("disable");
 };
-init();
 
-//Rolling dice functionality
-btnRoll.addEventListener("click", function () {
-  if (diceState) {
-    //1. Generating a random dice roll
-    const dice1 = Math.trunc(Math.random() * 6) + 1;
-    const dice2 = Math.trunc(Math.random() * 6) + 1;
+const disableDiceRoll = function () {
+  btnRoll.classList.add("disable");
+};
 
-    //2. Display dice
-    diceEl1.classList.remove("hidden");
-    diceEl2.classList.remove("hidden");
-    diceEl1.src = `dice-${dice1}.png`;
-    diceEl2.src = `dice-${dice2}.png`;
-
-    diceSum = dice1 + dice2;
-    console.log(diceSum);
-
-    diceState = false;
-
-    for (let i = 0; i < tileEl.length; i++) {
-      //tileEl[i].('tile--active');
-      // if (tileEl[i].classList.('tile--active')) {
-      //     tileEl[i].textContent = "";
-      // }
-    }
-    tileState = true;
-    tileSelect();
-  }
-});
-
-const tileSelect = function () {
-if(tileState) {
+const resetTiles = function () {
   tileEl.forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      console.log(diceState);
-      this.classList.add("tile--active");
-      let tileNumber = this.textContent;
-      tileInt = parseInt(tileNumber);
-      tileSum += tileInt;
-      tileCheck(tileSum);
-    });
+    btn.classList.remove("closed");
+    btn.classList.remove("tile--active");
   });
-}
+};
+tileEl.forEach(function (btn) {
+  btn.addEventListener("click", function () {
+    if (this.classList.contains("disable") || this.classList.contains("closed"))
+      return;
+    this.classList.add("tile--active");
+
+    let tileNumber = this.textContent;
+    tileInt = parseInt(tileNumber);
+    tileSum += tileInt;
+
+    tileCheck(tileSum);
+  });
+});
+const closeSelectedTiles = function () {
+  tileEl.forEach(function (btn) {
+    if (btn.classList.contains("tile--active")) {
+      btn.classList.add("closed");
+    }
+  });
 };
 
 const tileCheck = function (tilesum) {
   console.log("Tile Sum = " + tileSum);
 
-  if (tilesum < diceSum) {
-    tileSelect();
-    console.log("Choose another tile.");
-    // rollDice = true;
-  } else if (tilesum == diceSum) { 
-    tileState = false;
-    console.log("TileSum = DiceSum");
+  if (tilesum == diceSum) {
+    console.log("It's a match!");
+    closeSelectedTiles();
+    enableDiceRoll();
+  } else if (tilesum > diceSum) {
+    console.log("It's too high");
+    for (let i = 0; i < tileEl.length; i++) {
+      tileEl[i].classList.remove("tile--active");
+      tileSum = 0;
+    }
   } else {
-    console.log("You've gone over");
-    // for (let i = 0; i < tileEl.length; i++) {
-    //   tileEl[i].classList.remove("tile--active");
-    // }
+    console.log("It's too low");
   }
 };
+
+// Starting conditions / Reset
+const init = function () {
+  diceEl1.classList.add("hidden");
+  diceEl2.classList.add("hidden");
+  enableDiceRoll();
+  resetTiles();
+};
+init();
 
 btnNew.addEventListener("click", init);
