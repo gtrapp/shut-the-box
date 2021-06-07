@@ -5,7 +5,7 @@ const diceEl1 = document.getElementById("dice--1");
 const diceEl2 = document.getElementById("dice--2");
 const btnRoll = document.querySelector(".btn--roll");
 const btnNew = document.querySelector(".btn--new");
-const hints = document.getElementById("message");
+let hints = document.getElementById("message");
 
 let diceSum = 0;
 let tileInt = 0;
@@ -13,6 +13,7 @@ let tileSum = 0;
 let tilesActive;
 
 btnRoll.addEventListener("click", function () {
+  hints.innerHTML = ""
   if (btnRoll.classList.contains("disable")) return;
   //1. Generating a random dice roll
   const dice1 = Math.trunc(Math.random() * 6) + 1;
@@ -25,13 +26,14 @@ btnRoll.addEventListener("click", function () {
   diceEl2.src = `//raw.githubusercontent.com/gtrapp/shut-the-box/main/dice-${dice2}.png`;
 
   diceSum = dice1 + dice2;
-  console.log(diceSum);
-  
+  console.log("Dice Sum = " + diceSum);
+
   // disable roll dice reset tile sum
   tileSum = 0;
   disableDiceRoll();
   enableTileSelect();
   tilesActive = false;
+  hints.innerHTML = "Make a selection";
 });
 
 const enableDiceRoll = function () {
@@ -81,19 +83,20 @@ const tileCheck = function (tilesum) {
   console.log("Tile Sum = " + tileSum);
 
   if (tilesum == diceSum) {
-    console.log("It's a match!");
+    hints.innerHTML = "Well done!";
     closeSelectedTiles();
     tilesActive = true;
     disableTileSelect();
     enableDiceRoll();
   } else if (tilesum > diceSum) {
-    console.log("It's too high");
+    hints.innerHTML = "Try again";
+    console.log("too high");
     for (let i = 0; i < tileEl.length; i++) {
       tileEl[i].classList.remove("tile--selected");
       tileSum = 0;
     }
   } else {
-    console.log("It's too low");
+    hints.innerHTML = "";
   }
 };
 

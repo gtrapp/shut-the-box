@@ -206,3 +206,11 @@ main {
 .hidden {
   display: none;
 }
+
+#message {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 39rem;
+  font-size: 2rem;
+}
