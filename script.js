@@ -22,8 +22,10 @@ btnRoll.addEventListener("click", function () {
   //2. Display dice
   diceEl1.classList.remove("hidden");
   diceEl2.classList.remove("hidden");
-  diceEl1.src = `//raw.githubusercontent.com/gtrapp/shut-the-box/main/dice-${dice1}.png`;
-  diceEl2.src = `//raw.githubusercontent.com/gtrapp/shut-the-box/main/dice-${dice2}.png`;
+  // diceEl1.src = `//raw.githubusercontent.com/gtrapp/shut-the-box/main/dice-${dice1}.png`;
+  // diceEl2.src = `//raw.githubusercontent.com/gtrapp/shut-the-box/main/dice-${dice2}.png`;
+  diceEl1.src = `dice-${dice1}.png`;
+  diceEl2.src = `dice-${dice2}.png`;
 
   diceSum = dice1 + dice2;
   console.log("Dice Sum = " + diceSum);
