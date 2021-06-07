@@ -11,6 +11,14 @@ let diceSum = 0;
 let tileInt = 0;
 let tileSum = 0;
 
+// Starting conditions / New Game
+const init = function () {
+  diceEl1.classList.add("hidden");
+  diceEl2.classList.add("hidden");
+  enableDiceRoll();
+};
+init();
+
 btnRoll.addEventListener("click", function () {
   if (btnRoll.classList.contains("disable")) return;
   //1. Generating a random dice roll
@@ -93,13 +101,5 @@ const tileCheck = function (tilesum) {
   }
 };
 
-// Starting conditions / Reset
-const init = function () {
-  diceEl1.classList.add("hidden");
-  diceEl2.classList.add("hidden");
-  enableDiceRoll();
-  resetTiles();
-};
-init();
 
 btnNew.addEventListener("click", init);
