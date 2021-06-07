@@ -89,7 +89,7 @@ main {
   text-align: center;
   /* display: grid; */
   transition: all 0.75s;
-  cursor: pointer;
+
 }
 .tile.closed {
   transform: rotate3d(1, 1, 1, 120deg);
@@ -98,7 +98,7 @@ main {
 
 .tile--active {
     background-color: #365dc7;
-  
+    cursor: pointer;
 }
 
 .tile-label {
